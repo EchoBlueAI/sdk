@@ -1,0 +1,6 @@
+tsconfig.tsbuildinfo
+tsconfig.json
+src
+!types
+types/data
+.npmrc

@@ -1,0 +1,46 @@
+name: Build & Publish SDKs
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-publish:
+    strategy:
+      matrix:
+        sdk:
+          - redux
+    name: Build & Publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Fetch & Pull
+        run: |
+          git fetch
+          git pull
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'yarn'
+          registry-url: https://npm.pkg.github.com/
+
+      - name: Install
+        run: yarn --immutable
+
+      - name: Build SDK
+        run: yarn build:sdk:${{ matrix.sdk }}
+
+      - name: Update CWD to SDK directory
+        run: cd generated/${{ matrix.sdk }}
+
+      - name: Populate .npmrc
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
+
+      - name: Deploy 🚀
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
