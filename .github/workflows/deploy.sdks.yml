@@ -31,6 +31,8 @@ jobs:
         run: yarn --immutable
 
       - name: Build SDK
+        env:
+          YARN_ENABLE_IMMUTABLE_INSTALLS: false
         run: yarn build:sdk:${{ matrix.sdk }}
 
       - name: Update CWD to SDK directory

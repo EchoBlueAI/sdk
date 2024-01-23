@@ -27,7 +27,7 @@ await glob('templates/redux/**/*').then((files) =>
 )
 
 console.log('Installing dependencies...')
-await exec('yarn', ['--no-immutable'], { cwd })
+await exec('yarn', ['install', '--no-immutable'], { cwd })
 
 console.log('Generating redux files...')
 await exec('npx', ['@rtk-query/codegen-openapi', './src/data/rtk.config.ts'], {
