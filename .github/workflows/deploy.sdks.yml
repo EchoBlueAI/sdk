@@ -8,6 +8,8 @@ on:
 jobs:
   build-and-publish:
     permissions:
+      actions: read
+      repository-projects: read
       packages: write
     strategy:
       matrix:
