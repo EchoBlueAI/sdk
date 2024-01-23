@@ -82,6 +82,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@echoblueai/redux@workspace:generated/redux":
+  version: 0.0.0-use.local
+  resolution: "@echoblueai/redux@workspace:generated/redux"
+  dependencies:
+    "@reduxjs/toolkit": "npm:^2.0.1"
+    react: "npm:^18.2.0"
+    react-dom: "npm:^18.2.0"
+    react-redux: "npm:^9.1.0"
+  peerDependencies:
+    react: ^18.2.0
+    react-dom: ^18.2.0
+    react-redux: ^9.1.0
+  languageName: unknown
+  linkType: soft
+
 "@esbuild/aix-ppc64@npm:0.19.11":
   version: 0.19.11
   resolution: "@esbuild/aix-ppc64@npm:0.19.11"
