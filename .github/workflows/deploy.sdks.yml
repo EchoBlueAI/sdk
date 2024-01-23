@@ -36,9 +36,10 @@ jobs:
 
       - name: Populate .npmrc
         run: |
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> generated/${{ matrix.sdk }}/.npmrc
+          cd generated/${{ matrix.sdk }}
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
 
       - name: Deploy 🚀
-        run: npm publish generated/${{ matrix.sdk }}
+        run: cd generated/${{ matrix.sdk }} && npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
