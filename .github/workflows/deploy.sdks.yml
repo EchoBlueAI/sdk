@@ -7,10 +7,7 @@ on:
 
 jobs:
   build-and-publish:
-    permissions:
-      actions: read
-      repository-projects: read
-      packages: write
+    permissions: write-all
     strategy:
       matrix:
         sdk:
