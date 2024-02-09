@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.1-rc.1",
   "name": "@echoblueai/redux",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",

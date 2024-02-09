@@ -4,7 +4,7 @@ import { resolve } from 'node:path'
 const BASE_DIR = resolve(__dirname)
 
 const config = {
-  exportName: 'echoBlueApi',
+  exportName: 'getEchoBlueApi',
   apiImport: 'api',
   schemaFile: resolve(BASE_DIR, '../../../..', 'openapi.json'),
   apiFile: './empty.api.ts',

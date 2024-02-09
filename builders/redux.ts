@@ -2,7 +2,7 @@ import 'scripts/util/logging'
 import { execa as exec } from 'execa'
 
 import glob from 'fast-glob'
-import { cp, lstat, mkdir, rm } from 'node:fs/promises'
+import { cp, lstat, mkdir, rm, readFile, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 
 const cwd = resolve(process.cwd(), 'generated/redux')
@@ -33,6 +33,24 @@ console.log('Generating redux files...')
 await exec('npx', ['@rtk-query/codegen-openapi', './src/data/rtk.config.ts'], {
   cwd,
 })
+
+const index = await readFile('generated/redux/src/index.ts', 'utf-8')
+const newIndex = index
+  .replace(
+    /injectedRtkApi = api\./gi,
+    'injectedRtkApi = (api: Api<any, any, any, any>) => api.',
+  )
+  .replace(/export const \{(\W.+)*injectedRtkApi;/gi, '')
+  .replace(
+    'import { api } from "./data/empty.api";',
+    'import type { Api } from "@reduxjs/toolkit/query";',
+  )
+await writeFile(
+  'generated/redux/src/index.ts',
+  newIndex +
+    '\nconsole.log(process.env.VITE_API_BASE_URL);\nconsole.log(process.env.API_BASE_URL);\n',
+)
+console.log(' -- fixed generated/redux/src/index.ts')
 
 console.log('Compiling redux files...')
 await exec(
