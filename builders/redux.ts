@@ -43,10 +43,10 @@ const newIndex = index
   )
   .replace(/sampleApi as api/gi, 'sampleApi')
   .replace(/export const \{(\W.+)*injectedRtkApi;/gi, '')
+  .replace(/export \{ injectedRtkApi as getEchoBlueApi };/gi, '')
 await writeFile(
   'generated/redux/src/index.ts',
-  newIndex +
-    '\nconsole.log(process.env.VITE_API_BASE_URL);\nconsole.log(process.env.API_BASE_URL);\n',
+  newIndex + '\nexport { injectedRtkApi as getEchoBlueApi };\n',
 )
 console.log(' -- fixed generated/redux/src/index.ts')
 
