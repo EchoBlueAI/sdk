@@ -1,6 +1,6 @@
 /* eslint-disable */
 const { lilconfigSync } = require('lilconfig')
-const getConfig = (name) => lilconfigSync(name).search().config
+const getConfig = (name) => lilconfigSync(name).search()?.config
 const config = getConfig('.echobluerc') ?? getConfig('echobluerc.json')
 
 if (config) {
