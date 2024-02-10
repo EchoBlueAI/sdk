@@ -34,12 +34,12 @@ try {
   const esm = await readFile('./dist/esm/index.js', 'utf-8')
 
   const patchedCJS = cjs.replace(
-    '<<API_URL_TO_PATCH>>',
-    config.api?.url ?? 'https',
+    /\{(.+|\W*)baseUrl:(.+|\W*)"(.+)"(.+|\W*)}/,
+    `{ baseUrl: "${config.api?.url ?? 'https'}" }`,
   )
   const patchedESM = esm.replace(
-    '<<API_URL_TO_PATCH>>',
-    config.api?.url ?? 'https',
+    /\{(.+|\W*)baseUrl:(.+|\W*)"(.+)"(.+|\W*)}/,
+    `{ baseUrl: "${config.api?.url ?? 'https'}" }`,
   )
 
   await writeFile('./dist/cjs/index.js', patchedCJS)
@@ -48,7 +48,6 @@ try {
   console.log(
     'Redux API URL has been patched with the value from .echobluerc.json',
   )
-
 } catch (error) {
   console.error('Failed to patch Redux API URL', error)
 }
