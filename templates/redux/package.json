@@ -1,15 +1,17 @@
 {
-  "version": "1.0.1-rc.3",
+  "version": "1.0.1-rc.5",
   "name": "@echoblueai/redux",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "typings": "types/index.d.ts",
   "scripts": {
-    "postinstall": "node ./scripts/postinstall.js"
+    "postinstall": "yarn tsx ./scripts/post-install.mts"
   },
   "files": [
     "dist",
-    "types"
+    "types",
+    "rc.schema.json",
+    "scripts/post-install.mts"
   ],
   "repositroy": {
     "type": "git",
@@ -20,6 +22,7 @@
   },
   "exports": {
     "./package.json": "./package.json",
+    "./rc.schema.json": "./rc.schema.json",
     ".": {
       "require": "./dist/cjs/index.js",
       "import": "./dist/esm/index.js",
@@ -32,11 +35,14 @@
     }
   },
   "dependencies": {
+    "tsx": "^4.7.0",
     "@reduxjs/toolkit": "^2.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.1.0",
-    "lilconfig": "^3.0.0"
+    "lilconfig": "^3.0.0",
+    "ts-node": "^10.3.0",
+    "esbuild-runner": "^2.2.2"
   },
   "peerDependencies": {
     "react": "^18.2.0",

@@ -22,6 +22,11 @@
     "noEmit": false,
     "outDir": "types"
   },
-  "exclude": ["dist", "types", "node_modules"],
-  "include": ["src"]
+  "exclude": ["dist", "types", "scripts", "node_modules"],
+  "include": ["src"],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }

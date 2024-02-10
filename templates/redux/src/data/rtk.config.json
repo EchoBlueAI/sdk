@@ -1,0 +1,8 @@
+{
+  "exportName": "echoBlueApi",
+  "apiImport": "api",
+  "schemaFile": "./../../../../openapi.json",
+  "apiFile": "./empty.api.ts",
+  "outputFile": "./../../src/index.ts",
+  "hooks": true
+}

@@ -4,7 +4,6 @@ import { execa as exec } from 'execa'
 import glob from 'fast-glob'
 import { cp, lstat, mkdir, rm, readFile, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
-import { sampleApi } from 'templates/redux/src/data/empty.api'
 
 const cwd = resolve(process.cwd(), 'generated/redux')
 
@@ -28,27 +27,22 @@ await glob('templates/redux/**/*').then((files) =>
 )
 
 console.log('Installing dependencies...')
-await exec('yarn', ['install', '--no-immutable'], { cwd })
-
-console.log('Generating redux files...')
-await exec('npx', ['@rtk-query/codegen-openapi', './src/data/rtk.config.ts'], {
+await exec('yarn', ['install', '--no-immutable'], {
   cwd,
+  stdout: 'inherit',
+  stderr: 'inherit',
 })
 
-const index = await readFile('generated/redux/src/index.ts', 'utf-8')
-const newIndex = index
-  .replace(
-    /injectedRtkApi = api\./gi,
-    'injectedRtkApi = (api: typeof sampleApi) => api.',
-  )
-  .replace(/sampleApi as api/gi, 'sampleApi')
-  .replace(/export const \{(\W.+)*injectedRtkApi;/gi, '')
-  .replace(/export \{ injectedRtkApi as getEchoBlueApi };/gi, '')
-await writeFile(
-  'generated/redux/src/index.ts',
-  newIndex + '\nexport { injectedRtkApi as getEchoBlueApi };\n',
+console.log('Generating redux files...')
+await exec(
+  'npx',
+  ['@rtk-query/codegen-openapi', './src/data/rtk.config.json'],
+  {
+    cwd,
+    stdout: 'inherit',
+    stderr: 'inherit',
+  },
 )
-console.log(' -- fixed generated/redux/src/index.ts')
 
 console.log('Compiling redux files...')
 await exec(

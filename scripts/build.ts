@@ -1,7 +1,6 @@
 import { build, BuildOptions } from 'esbuild'
 import { execa as exec } from 'execa'
 import { externalNodePlugin } from './build-helpers/external-node.plugin'
-import { transformPathsPlugin } from './build-helpers/transform-paths.plugin'
 import getCommandLineArgs from 'command-line-args'
 
 const args = getCommandLineArgs([
