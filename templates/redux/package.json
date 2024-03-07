@@ -1,5 +1,5 @@
 {
-  "version": "1.2.0",
+  "version": "1.2.1",
   "name": "@echoblueai/redux",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -7,12 +7,7 @@
   "scripts": {
     "postinstall": "npx tsx ./scripts/post-install.mts"
   },
-  "files": [
-    "dist",
-    "types",
-    "rc.schema.json",
-    "scripts/post-install.mts"
-  ],
+  "files": ["dist", "types", "rc.schema.json", "scripts/post-install.mts"],
   "repositroy": {
     "type": "git",
     "url": "https://github.com/EchoBlueAI/sdk.git"

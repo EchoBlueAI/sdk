@@ -2,7 +2,7 @@
   "private": true,
   "type": "module",
   "name": "sdk",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "scripts": {
     "build:sdk:node": "yarn tsx builders/node.ts",
     "build:sdk:redux": "yarn tsx builders/redux.ts"
