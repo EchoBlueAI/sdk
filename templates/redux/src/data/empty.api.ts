@@ -6,7 +6,7 @@ export const getTokenFromLocalStorage = () => {
 };
 
 // initialize an empty api service that we'll inject endpoints into later as needed
-export const emptySplitApi = createApi({
+export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:3001/",
     headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
