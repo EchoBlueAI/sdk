@@ -33,14 +33,14 @@ try {
   const cjs = await readFile("./dist/cjs/index.js", "utf-8");
   const esm = await readFile("./dist/esm/index.js", "utf-8");
 
-  const patchedCJS = cjs.replace(
-    /\{(.+|\W*)baseUrl:(.+|\W*)"(.+)"(.+|\W*)}/,
-    `{ baseUrl: "${config.api?.url ?? "/"}" }`,
-  );
-  const patchedESM = esm.replace(
-    /\{(.+|\W*)baseUrl:(.+|\W*)"(.+)"(.+|\W*)}/,
-    `{ baseUrl: "${config.api?.url ?? "/"}" }`,
-  );
+  // Simplified regex to match the baseUrl line
+  const baseUrlRegex = /(baseUrl: )("[^"]*")/;
+
+  // For the ESM version
+  const patchedESM = esm.replace(baseUrlRegex, `$1"${config.api?.url ?? "/"}"`);
+
+  // For the CJS version
+  const patchedCJS = cjs.replace(baseUrlRegex, `$1"${config.api?.url ?? "/"}"`);
 
   await writeFile("./dist/cjs/index.js", patchedCJS);
   await writeFile("./dist/esm/index.js", patchedESM);
