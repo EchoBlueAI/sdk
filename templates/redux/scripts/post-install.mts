@@ -42,6 +42,8 @@ try {
   // For the CJS version
   const patchedCJS = cjs.replace(baseUrlRegex, `$1"${config.api?.url ?? "/"}"`);
 
+  console.log({ patchedCJS });
+
   await writeFile("./dist/cjs/index.js", patchedCJS);
   await writeFile("./dist/esm/index.js", patchedESM);
 
