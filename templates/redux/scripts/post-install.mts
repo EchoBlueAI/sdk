@@ -34,12 +34,12 @@ try {
   const esm = await readFile("./dist/esm/index.js", "utf-8");
 
   const patchedCJS = cjs.replace(
-    /\{(.+|\W*)baseUrl:(.+|\W*)"(.+)"(.+|\W*)}/,
-    `{ baseUrl: "${config.api?.url ?? "/"}" }`,
+    /baseUrl:(.+|\W*)["'](.+)["']/g,
+    `baseUrl: "${config.api?.url ?? "/"}"`,
   );
   const patchedESM = esm.replace(
-    /\{(.+|\W*)baseUrl:(.+|\W*)"(.+)"(.+|\W*)}/,
-    `{ baseUrl: "${config.api?.url ?? "/"}" }`,
+    /baseUrl:(.+|\W*)["'](.+)["']/g,
+    `baseUrl: "${config.api?.url ?? "/"}"`,
   );
 
   await writeFile("./dist/cjs/index.js", patchedCJS);
